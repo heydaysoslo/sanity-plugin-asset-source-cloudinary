@@ -1,4 +1,6 @@
 {
   "cloudName": "",
-  "apiKey": ""
+  "apiKey": "",
+  "secret": "",
+  "username": ""
 }

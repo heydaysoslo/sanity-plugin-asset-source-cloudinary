@@ -11,14 +11,12 @@ import { arrayMove } from 'react-sortable-hoc'
 import { v1 as uuid } from 'uuid'
 
 import styles from './Wrapper.css'
-console.log('styles', styles)
 
 import Icon from './Icon'
 
 const createPatchFrom = value => PatchEvent.from(!value ? unset() : set(value))
 
 const Wrapper = ({ type, value, markers, selectionType, resourceType, onChange }) => {
-  console.log('fired', type)
   const [open, setOpen] = useState(false)
   const [items, setItems] = useState([])
   const resolveValues = vals => {

@@ -3,6 +3,8 @@ import React from 'react'
 import Dialog from 'part:@sanity/components/dialogs/fullscreen'
 import Spinner from 'part:@sanity/components/loading/spinner'
 import pluginConfig from 'config:asset-source-cloudinary'
+import sha256 from 'crypto-js/sha256'
+import encode from 'crypto-js/enc-hex'
 
 import { Asset, AssetDocument, CloudinaryAsset, CloudinaryMediaLibrary } from '../types'
 import { loadCloudinary, decodeSourceId, encodeFilename, encodeSourceId } from '../utils'
@@ -12,6 +14,10 @@ declare global {
   interface Window {
     cloudinary: any
   }
+}
+
+const getUnixTime = () => {
+  return Math.round(new Date().getTime() / 1000)
 }
 
 window.cloudinary = window.cloudinary || {}
@@ -54,10 +60,27 @@ export default class CloudinaryAssetSource extends React.Component<Props, State>
   private setupMediaLibrary = () => {
     const { selectedAssets, selectionType } = this.props
     const firstSelectedAsset = selectedAssets ? selectedAssets[0] : null
+    // Check if credentials are provided
+    const hasCredentials = pluginConfig.username && pluginConfig.secret
+    let credentials = {}
+    // If credentials are provided. Generate login encryption
+    // https://cloudinary.com/documentation/media_library_widget#2_optional_generate_the_authentication_signature
+    if (hasCredentials) {
+      credentials = {
+        username: pluginConfig.username,
+        timestamp: getUnixTime(),
+        signature: sha256(
+          `cloud_name=${pluginConfig.cloudName}&timestamp=${getUnixTime()}&username=${
+            pluginConfig.username
+          }${pluginConfig.secret}`
+        ).toString(encode)
+      }
+    }
     this.library = window.cloudinary.createMediaLibrary(
       {
         cloud_name: pluginConfig.cloudName,
         api_key: pluginConfig.apiKey,
+        ...credentials,
         inline_container: `#cloundinaryWidget-${this.domId}`,
         remove_header: true,
         insert_caption: 'Select'

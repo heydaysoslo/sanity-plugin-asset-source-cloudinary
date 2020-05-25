@@ -1,7 +1,7 @@
 {
-  "name": "sanity-plugin-asset-source-cloudinary",
-  "version": "0.1.0",
-  "description": "Sanity Studio plugin for using Cloudinary to select images from",
+  "name": "sanity-plugin-asset-source-cloudinary-test",
+  "version": "0.0.6",
+  "description": "**TEST**TEST**TEST** Test of multi video and multi image",
   "keywords": [
     "sanity",
     "plugin",
@@ -17,7 +17,7 @@
     "sanity.json",
     "config.dist.json"
   ],
-  "author": "Sanity.io <hello@sanity.io>",
+  "author": "Heydays",
   "repository": {
     "type": "git",
     "url": ""
@@ -29,10 +29,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity-plugin-asset-source-cloudinary/issues"
-  },
-  "homepage": "https://github.com/sanity-io/sanity-plugin-asset-source-cloudinary#readme",
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
@@ -129,6 +125,8 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "@types/crypto-js": "^3.1.45",
+    "crypto-js": "^4.0.0",
     "uuid": "^8.0.0"
   }
 }

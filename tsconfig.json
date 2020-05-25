@@ -18,6 +18,9 @@
     "typeRoots": ["node_modules/@types"],
     "baseUrl": ".",
     "paths": {
+      "config:asset-source-cloudinary": [
+        "./config.dist.json"
+      ],
       "part:@sanity/base/spinner-icon": [
         "./test/__mocks__/styleMock.js"
       ],
@@ -48,9 +51,6 @@
       "part:@sanity/components/fieldsets/default": [
         "./node_modules/@sanity/components/lib/fieldsets/DefaultFieldset.js"
       ],
-      "config:asset-source-cloudinary": [
-        "./config.dist.json"
-      ]
 
     }
   },
