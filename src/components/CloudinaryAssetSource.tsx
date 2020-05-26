@@ -81,6 +81,7 @@ export default class CloudinaryAssetSource extends React.Component<Props, State>
         cloud_name: pluginConfig.cloudName,
         api_key: pluginConfig.apiKey,
         ...credentials,
+        max_files: 20000,
         inline_container: `#cloundinaryWidget-${this.domId}`,
         remove_header: true,
         insert_caption: 'Select'
