@@ -19,8 +19,6 @@ export default {
       ),
       of: [
         {
-          name: 'video',
-          title: 'Video',
           type: 'cloudinarySingleVideo'
         }
       ]
