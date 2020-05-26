@@ -21,7 +21,7 @@ export default {
       ),
       of: [
         {
-          name: 'image',
+          name: 'cldimage',
           title: 'Image',
           type: 'cloudinarySingleImage'
         }
