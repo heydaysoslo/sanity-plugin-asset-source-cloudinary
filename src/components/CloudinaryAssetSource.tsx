@@ -5,6 +5,7 @@ import Spinner from 'part:@sanity/components/loading/spinner'
 import pluginConfig from 'config:asset-source-cloudinary'
 import sha256 from 'crypto-js/sha256'
 import encode from 'crypto-js/enc-hex'
+import { withDocument } from 'part:@sanity/form-builder'
 
 import { Asset, AssetDocument, CloudinaryAsset, CloudinaryMediaLibrary } from '../types'
 import { loadCloudinary, decodeSourceId, encodeFilename, encodeSourceId } from '../utils'
@@ -25,6 +26,7 @@ window.cloudinary = window.cloudinary || {}
 type Props = {
   onSelect: (assets: Asset[]) => void
   onClose: () => void
+  document: any
   selectedAssets?: AssetDocument[]
   selectionType: 'single' | 'multiple'
   resourceType: 'video' | 'image'
@@ -35,7 +37,7 @@ type State = {
   hasConfig: boolean
 }
 
-export default class CloudinaryAssetSource extends React.Component<Props, State> {
+class CloudinaryAssetSource extends React.Component<Props, State> {
   static defaultProps = {
     selectedAssets: undefined,
     resourceType: 'image'
@@ -180,8 +182,13 @@ export default class CloudinaryAssetSource extends React.Component<Props, State>
 
   render() {
     const { hasConfig, loadingMessage } = this.state
+    const { document } = this.props
     return (
-      <Dialog title="Select image from Cloudinary" onClose={this.handleClose} isOpen>
+      <Dialog
+        title={`${document && document.title && `${document.title} `}Select image from Cloudinary`}
+        onClose={this.handleClose}
+        isOpen
+      >
         {hasConfig && loadingMessage && <Spinner fullscreen center message={loadingMessage} />}
         {hasConfig && (
           <div
@@ -196,3 +203,5 @@ export default class CloudinaryAssetSource extends React.Component<Props, State>
     )
   }
 }
+
+export default withDocument(CloudinaryAssetSource)
