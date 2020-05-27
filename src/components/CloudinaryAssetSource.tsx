@@ -35,7 +35,7 @@ type State = {
   hasConfig: boolean
 }
 
-class CloudinaryAssetSource extends React.Component<Props, State> {
+export default class CloudinaryAssetSource extends React.Component<Props, State> {
   static defaultProps = {
     selectedAssets: undefined,
     resourceType: 'image'
@@ -196,5 +196,3 @@ class CloudinaryAssetSource extends React.Component<Props, State> {
     )
   }
 }
-
-export default withDocument(CloudinaryAssetSource)
