@@ -125,6 +125,8 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "@sanity/react-hooks": "^1.149.16",
+    "@sanity/uuid": "^1.149.16",
     "@types/crypto-js": "^3.1.45",
     "crypto-js": "^4.0.0",
     "uuid": "^8.0.0"

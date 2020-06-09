@@ -24,6 +24,10 @@
     {
       "implements": "part:@sanity/base/schema-type",
       "path": "schemas/cloudinaryMultipleImage.js"
+    },
+    {
+      "implements": "part:@sanity/base/schema-type",
+      "path": "schemas/cloudinaryMediaSource.js"
     }
   ]
 }
