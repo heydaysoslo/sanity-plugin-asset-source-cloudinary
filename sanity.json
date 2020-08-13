@@ -10,24 +10,13 @@
       "path": "index.js"
     },
     {
-      "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/cloudinarySingleVideo.js"
+      "name": "part:sanity-plugin-asset-source-cloudinary/helpers",
+      "description": "React component that renders a preview of a given movie",
+      "path": "helpers/index.js"
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/cloudinarySingleImage.js"
-    },
-    {
-      "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/cloudinaryMultipleVideo.js"
-    },
-    {
-      "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/cloudinaryMultipleImage.js"
-    },
-    {
-      "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/cloudinaryMediaSource.js"
+      "path": "schemas/cloudinaryMedia.js"
     }
   ]
 }

@@ -28,6 +28,7 @@ type Props = {
   selectedAssets?: AssetDocument[]
   selectionType: 'single' | 'multiple'
   resourceType: 'video' | 'image'
+  forField?: 'string'
 }
 
 type State = {
@@ -132,7 +133,6 @@ export default class CloudinaryAssetSource extends React.Component<Props, State>
     this.library.hide()
     this.props.onSelect(
       [...imageAssets, ...videoAssets].map((asset: CloudinaryAsset) => {
-        console.log(asset)
         const url =
           asset.derived && asset.derived[0] ? asset.derived[0].secure_url : asset.secure_url
         return {
@@ -181,7 +181,11 @@ export default class CloudinaryAssetSource extends React.Component<Props, State>
   render() {
     const { hasConfig, loadingMessage } = this.state
     return (
-      <Dialog title="Select image from Cloudinary" onClose={this.handleClose} isOpen>
+      <Dialog
+        title={`Select image from Cloudinary for ${this.props.forField}`}
+        onClose={this.handleClose}
+        isOpen
+      >
         {hasConfig && loadingMessage && <Spinner fullscreen center message={loadingMessage} />}
         {hasConfig && (
           <div

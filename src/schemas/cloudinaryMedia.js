@@ -2,9 +2,10 @@ import React from 'react'
 import CloudinaryAssetSource from '../components/Wrapper'
 import Icon from '../components/Icon'
 import cloudinaryAsset from './cloudinaryAsset'
+import { getCloudinaryImageSource } from '../helpers'
 
 export default {
-  name: 'cloudinaryMediaSource',
+  name: 'cloudinaryMedia',
   title: 'Cloudinary media',
   type: 'object',
   inputComponent: props => {
@@ -15,5 +16,29 @@ export default {
     )
   },
   icon: Icon,
-  fields: cloudinaryAsset
+  fields: [
+    {
+      name: 'media',
+      title: 'media',
+      type: 'object',
+      fields: cloudinaryAsset
+    }
+  ],
+  preview: {
+    select: {
+      media: 'media'
+    },
+    prepare({ media }) {
+      const newMedia = media
+        ? getCloudinaryImageSource(media, {
+            width: 200,
+            height: 200
+          })
+        : ''
+      return {
+        title: media.public_id || 'No image',
+        media: <img src={newMedia} alt="" />
+      }
+    }
+  }
 }
