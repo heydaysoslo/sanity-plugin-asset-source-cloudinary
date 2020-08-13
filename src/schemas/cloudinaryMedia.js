@@ -1,7 +1,6 @@
 import React from 'react'
 import CloudinaryAssetSource from '../components/Wrapper'
 import Icon from '../components/Icon'
-import cloudinaryAsset from './cloudinaryAsset'
 import { getCloudinaryImageSource } from '../helpers'
 
 export default {
@@ -20,8 +19,7 @@ export default {
     {
       name: 'media',
       title: 'media',
-      type: 'object',
-      fields: cloudinaryAsset
+      type: 'media'
     }
   ],
   preview: {
