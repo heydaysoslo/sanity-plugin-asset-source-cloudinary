@@ -16,10 +16,6 @@
     },
     {
       "implements": "part:@sanity/base/schema-type",
-      "path": "schemas/media.js"
-    },
-    {
-      "implements": "part:@sanity/base/schema-type",
       "path": "schemas/cloudinaryMedia.js"
     }
   ]
