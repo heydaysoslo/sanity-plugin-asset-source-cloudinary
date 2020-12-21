@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-asset-source-cloudinary-test",
-  "version": "0.0.19",
+  "version": "0.0.21",
   "description": "**TEST**TEST**TEST** Test of multi video and multi image",
   "keywords": [
     "sanity",
@@ -129,6 +129,7 @@
     "@sanity/uuid": "^1.149.16",
     "@types/crypto-js": "^3.1.45",
     "crypto-js": "^4.0.0",
+    "nanoid": "^3.1.20",
     "uuid": "^8.0.0"
   }
 }

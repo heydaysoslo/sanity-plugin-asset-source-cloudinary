@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Component } from 'react'
-import { useDocumentOperation } from '@sanity/react-hooks'
+import React, { Component } from 'react' // useState, useEffect,
+// import { useDocumentOperation } from '@sanity/react-hooks'
 import Button from 'part:@sanity/components/buttons/default'
 import ButtonGrid from 'part:@sanity/components/buttons/button-grid'
 import Fieldset from 'part:@sanity/components/fieldsets/default'
@@ -7,20 +7,21 @@ import CloudinaryAssetSource from './CloudinaryAssetSource'
 import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event'
 import { withDocument } from 'part:@sanity/form-builder'
 import { setIfMissing } from 'part:@sanity/form-builder/patch-event'
-import uuid from '@sanity/uuid'
+// import uuid from '@sanity/uuid'
+import { nanoid } from 'nanoid'
 
 import Icon from './Icon'
 import CloudinaryPreview from './CloudinaryPreview'
 
 const createPatchFrom = value => PatchEvent.from(!value ? unset() : set(value))
 
-const getOriginalDocumentId = id => {
-  console.log('id', id)
-  if (id.indexOf('drafts.') !== -1) {
-    return id.split('drafts.')[1]
-  }
-  return id
-}
+// const getOriginalDocumentId = id => {
+//   console.log('id', id)
+//   if (id.indexOf('drafts.') !== -1) {
+//     return id.split('drafts.')[1]
+//   }
+//   return id
+// }
 
 // const Wrapper = (props, ...rest) => {
 //   const { type, value, markers, selectionType, resourceType, onChange, document } = props
@@ -43,9 +44,9 @@ const getOriginalDocumentId = id => {
 //         if (vals.length) {
 //           const insertItems = vals.map(item => {
 //             return {
-//               _key: uuid(),
+//               _key: nanoid(),
 //               _type: parentName,
-//               media: { ...item, _key: uuid(), aspectRatio: item.width / item.height }
+//               media: { ...item, _key: nanoid(), aspectRatio: item.width / item.height }
 //             }
 //           })
 //           // https://www.sanity.io/docs/http-patches#appending-Cw4vhD88
@@ -58,7 +59,7 @@ const getOriginalDocumentId = id => {
 //             }
 //           ])
 //         }
-//         return { ...lastItem, _key: uuid(), aspectRatio: lastItem.width / lastItem.height }
+//         return { ...lastItem, _key: nanoid(), aspectRatio: lastItem.width / lastItem.height }
 //       }
 //     }
 
@@ -67,7 +68,7 @@ const getOriginalDocumentId = id => {
 //     }
 
 //     if (type.name === 'cloudinaryMedia') {
-//       return { ...vals[0], _key: uuid(), aspectRatio: vals[0].width / vals[0].height }
+//       return { ...vals[0], _key: nanoid(), aspectRatio: vals[0].width / vals[0].height }
 //     }
 //   }
 
@@ -137,9 +138,9 @@ class Wrapper extends Component {
         if (vals.length) {
           const insertItems = vals.map(item => {
             return {
-              _key: uuid(),
+              _key: nanoid(),
               _type: parentName,
-              media: { ...item, _key: uuid(), aspectRatio: item.width / item.height }
+              media: { ...item, _key: nanoid(), aspectRatio: item.width / item.height }
             }
           })
           // https://www.sanity.io/docs/http-patches#appending-Cw4vhD88
@@ -152,7 +153,7 @@ class Wrapper extends Component {
             }
           ])
         }
-        return { ...lastItem, _key: uuid(), aspectRatio: lastItem.width / lastItem.height }
+        return { ...lastItem, _key: nanoid(), aspectRatio: lastItem.width / lastItem.height }
       }
     }
 
@@ -161,7 +162,7 @@ class Wrapper extends Component {
     }
 
     if (type.name === 'cloudinaryMedia') {
-      return { ...vals[0], _key: uuid(), aspectRatio: vals[0].width / vals[0].height }
+      return { ...vals[0], _key: nanoid(), aspectRatio: vals[0].width / vals[0].height }
     }
   }
 
@@ -169,10 +170,13 @@ class Wrapper extends Component {
     const { onChange, type } = this.props
     onChange(createPatchFrom(this.resolveValues(vals)).prepend(setIfMissing({ _type: type.name })))
     // Hide cloudinary GUI
-    this.setState(prevState => ({ ...prevState, open: !prevState.open }))
+    if (vals !== null) {
+      this.setState(prevState => ({ ...prevState, open: !prevState.open }))
+    }
     // // Return null if no value
     // return vals ? vals[0] : null
   }
+
   render() {
     const { type, value, markers, selectionType, resourceType } = this.props
     return (
@@ -205,7 +209,7 @@ class Wrapper extends Component {
               Select/Upload
             </Button>
             {value && (
-              <Button onClick={() => handleSelect(null)} kind="secondary" color="danger">
+              <Button onClick={() => this.handleSelect(null)} kind="secondary" color="danger">
                 Remove{' '}
                 {selectionType === 'multiple' && Array.isArray(value) && value.length > 1 && 'all'}
               </Button>
